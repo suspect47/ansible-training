@@ -1,0 +1,10 @@
+#Устанавливаем python3
+yum install python3
+
+#Генерируем хеш пароля
+python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+Password: devops
+Confirm: devops
+$6$JFFcsL19WuGzn8jy$Gs7GB8IF/8QsrTXYNXGn/RxDiS7A3awAPmkV/Gnkz0EWlw1qDVdraGss7/lgijZFj2tJbUulJE5PpL7/SztT1.
+
+
