@@ -1,10 +1,21 @@
-#Устанавливаем python3
-yum install python3
+---
+- hosts: ansible2.hl.local
+  tasks:
+  - name: Creating user "automation" on nodes
+    user:
+      name: automation
+      group: wheel
+  
+  - name: ssh-key 
+    authorized_key:
+      user: automation
+      state: present
+      key: "{{ lookup('file', '/home/automation/.ssh/id_rsa.pub')  }}"
 
-#Генерируем хеш пароля
-python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
-Password: devops
-Confirm: devops
-$6$JFFcsL19WuGzn8jy$Gs7GB8IF/8QsrTXYNXGn/RxDiS7A3awAPmkV/Gnkz0EWlw1qDVdraGss7/lgijZFj2tJbUulJE5PpL7/SztT1.
-
-
+  - name: Insert string in /etc/sudoers for user automation
+    blockinfile:
+      path: /etc/sudoers
+      insertafter: "root"
+      block: |
+        automation    ALL=(ALL)	ALL
+---
