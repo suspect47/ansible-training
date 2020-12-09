@@ -1,0 +1,15 @@
+#Create Ansible vault file /home/automation/plays/secret.yml. Encryption/decryption password is devops.
+#Add the following variables to the vault:
+#user_password with value of devops
+#database_password with value of devops
+#Store Ansible vault password in the file /home/automation/plays/vault_key
+
+#Commands:
+#ansible-vault create secret.yml
+#ansible-vault view secret.yml
+#ansible-vault edit secret.yml 
+#ansible-vault rekey secret.yml сменить пароль
+#ansible-vault encrypt secret.yml зашифровать
+#ansible-vault decrypt secret.yml расшифровать
+#ansible-playbook xz.yml --ask-vault-pass запуск зашифрованного плейбука с запросом пароля
+#ansible-playbook xz.yml --vault-password-file password.txt запуск зашифрованного плейбука без запроса пароля с указанием на парольный файл
