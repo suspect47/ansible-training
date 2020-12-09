@@ -1,0 +1,28 @@
+#Generate an SSH keypair on the control node. You can perform this step manually.
+#Write a script /home/automation/plays/adhoc that uses Ansible ad-hoc commands to achieve the following:
+#User automation is created on all inventory hosts (not the control node).
+#SSH key (that you generated) is copied to all inventory hosts for the automation user and stored in /home/automation/.ssh/authorized_keys.
+#The automation user is allowed to elevate privileges on all inventory hosts without having to provide a password.
+#After running the adhoc script, you should be able to SSH into all inventory hosts using the automation user without password, as well as a run all privileged commands.
+
+
+---
+- hosts: ansible2.hl.local
+  tasks:
+  - name: Creating user "automation" on nodes
+    user:
+      name: automation
+      group: wheel
+  
+  - name: ssh-key 
+    authorized_key:
+      user: automation
+      state: present
+      key: "{{ lookup('file', '/home/automation/.ssh/id_rsa.pub')  }}"
+
+  - name: Insert string in /etc/sudoers for user automation
+    blockinfile:
+      path: /etc/sudoers
+      insertafter: "root"
+      block: |
+        automation    ALL=(ALL)	NOPASSWD:ALL
