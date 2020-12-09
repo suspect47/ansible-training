@@ -4,12 +4,15 @@
 #database_password with value of devops
 #Store Ansible vault password in the file /home/automation/plays/vault_key
 
-#Commands:
-#ansible-vault create secret.yml
-#ansible-vault view secret.yml
-#ansible-vault edit secret.yml 
-#ansible-vault rekey secret.yml сменить пароль
-#ansible-vault encrypt secret.yml зашифровать
-#ansible-vault decrypt secret.yml расшифровать
-#ansible-playbook xz.yml --ask-vault-pass запуск зашифрованного плейбука с запросом пароля
-#ansible-playbook xz.yml --vault-password-file password.txt запуск зашифрованного плейбука без запроса пароля с указанием на парольный файл
+# Commands:
+# ansible-vault create secret.yml
+# ansible-vault view secret.yml
+# ansible-vault edit secret.yml 
+# ansible-vault rekey secret.yml сменить пароль
+# ansible-vault encrypt secret.yml зашифровать
+# ansible-vault decrypt secret.yml расшифровать
+# ansible-playbook xz.yml --ask-vault-pass запуск зашифрованного плейбука с запросом пароля
+# ansible-playbook xz.yml --vault-password-file password.txt запуск зашифрованного плейбука без запроса пароля с указанием на парольный файл
+# ansible-vault encrypt_string + ENTER зашифровать строку(пароль)
+# или
+# echo -n "##MYPASSWORD&&*&" | ansible-vault encript_string
