@@ -17,5 +17,5 @@
       path: /etc/sudoers
       insertafter: "root"
       block: |
-        automation    ALL=(ALL)	ALL
+        automation    ALL=(ALL)	NOPASSWD:ALL
 ---
