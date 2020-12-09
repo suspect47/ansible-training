@@ -1,3 +1,5 @@
+SOURCE: https://www.lisenet.com/2019/ansible-sample-exam-for-ex407/
+
 Ansible Sample Exam for EX407/EX294
 Posted on 07/05/2019 by Tomas
 This is a sample Ansible exam that I’ve created to prepare for EX407. I have not taken the EX407 exam yet.
