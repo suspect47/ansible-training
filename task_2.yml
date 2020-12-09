@@ -7,7 +7,7 @@
 
 
 ---
-- hosts: ansible2.hl.local
+- hosts: all
   tasks:
   - name: Creating user "automation" on nodes
     user:
