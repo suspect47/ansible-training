@@ -1,0 +1,16 @@
+---
+- hosts: database
+  become: true
+  tasks:
+    - name: Import a key from url
+      rpm_key:
+	state: present
+        key: http://repo.mysql.com/RPM-GPG-KEY-mysql
+    - name: Add repository
+      yum_repository:
+        name: mysql56-community
+        description: MySQL 5.6 YUM Repo
+        file: external_repos
+        baseurl: http://repo.mysql.com/yum/mysql-5.6-community/el/7/x86_64/
+        gpgcheck: yes
+        enabled: yes
