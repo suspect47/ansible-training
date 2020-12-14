@@ -1,0 +1,15 @@
+# do the job every minute
+---
+- hosts: proxy
+  become: true
+  tasks:
+   - name: cron remove
+     cron:
+      name: date_logfile
+      state: absent
+   - name: cron add
+     cron:
+      name: date_logfile
+      user: root
+      minute: "*"
+      job: "/bin/date>>/var/log/time.log"
