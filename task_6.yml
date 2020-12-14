@@ -1,0 +1,64 @@
+---
+- hosts: webservers
+  become: true
+  vars_files:
+    - secret.yml
+  tasks:
+    - name: Creating user Alice
+      user:
+        name: alice
+        uid: 1201
+        group: wheel
+        shell: /bin/bash
+        password: "{{ user_password | password_hash('sha512') }}"
+        update_password: on_create
+    - name: ssh-key Alice
+      authorized_key:
+        user: alice
+        state: present
+        key: "{{ lookup('file', '/home/alice/.ssh/id_rsa.pub')  }}"   
+    - name: Creating user Vincent
+      user:
+        name: vincent
+        uid: 1202
+        group: wheel
+        shell: /bin/bash
+        password: "{{ user_password | password_hash('sha512') }}"
+        update_password: on_create
+    - name: ssh-key Vincent
+      authorized_key:
+        user: vincent
+        state: present
+        key: "{{ lookup('file', '/home/vincent/.ssh/id_rsa.pub')  }}"
+
+- hosts: database
+  become: true
+  vars_files:
+    - secret.yml
+  tasks:
+    - name: Creating user Sandy
+      user:
+        name: sandy
+        uid: 2201
+        group: wheel
+        shell: /bin/bash
+        password: "{{ user_password | password_hash('sha512') }}"
+        update_password: on_create
+    - name: ssh-key Sandy
+      authorized_key:
+        user: sandy
+        state: present
+        key: "{{ lookup('file', '/home/sandy/.ssh/id_rsa.pub')  }}"
+    - name: Creating user Patrick
+      user:
+        name: patrick
+        uid: 2202
+        group: wheel
+        shell: /bin/bash
+        password: "{{ user_password | password_hash('sha512') }}"
+        update_password: on_create
+    - name: ssh-key Patrick
+      authorized_key:
+        user: patrick
+        state: present
+        key: "{{ lookup('file', '/home/patrick/.ssh/id_rsa.pub')  }}"
