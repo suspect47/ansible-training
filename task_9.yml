@@ -1,1 +1,3 @@
 # ansible-galaxy init sample-mysql
+# ansible-galaxy collection install community.general
+# ansible-galaxy collection install ansible.posix
