@@ -53,6 +53,7 @@ ansible2.hl.local is a member of the proxy host group.
 ansible3.hl.local is a member of the webservers host group.
 ansible4.hl.local is a member of the webservers host group.
 ansible5.hl.local is a member of the database host group.\
+
 Task 2: Ad-Hoc Commands
 Generate an SSH keypair on the control node. You can perform this step manually.
 
