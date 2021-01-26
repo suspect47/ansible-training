@@ -1,0 +1,45 @@
+---
+# tasks file for sample-mysql
+
+- name: Create a new primary partition with a size of 800MiB
+  community.general.parted:
+    device: "{{block_device}}"
+    number: 1
+    state: present
+    part_end: 800MiB
+
+- name: Create LVM volume group
+  community.general.lvg:
+    vg: "{{volume_group}}"
+    pvs: "{{pvs}}"
+
+- name: Create a logical volume of 512mb.
+  community.general.lvol:
+    vg: "{{volume_group}}"
+    lv: "{{logical_volume}}"
+    size: 512m
+
+- name: Create a xfs filesystem on 
+  community.general.filesystem:
+    fstype: "{{file_system}}"
+    dev: "{{volume_path}}"
+
+- name: Create a directory "{{mount_volume_path}}"
+  ansible.builtin.file:
+    path: "{{mount_volume_path}}"
+    state: directory
+    mode: '0755'
+
+- name: Mount volume
+  ansible.posix.mount:
+    src: "{{volume_src}}"
+    path: "{{mount_volume_path}}"
+    opts: rw
+    state: mounted
+    fstype: "{{file_system}}"
+
+#- name: Add a line to fstab
+#  ansible.builtin.lineinfile:
+#    path: /etc/fstab
+#    line: /dev/vg_database/lv_mysql xfs defaults 0 0
+

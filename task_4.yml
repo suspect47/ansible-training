@@ -1,13 +1,8 @@
-#Create a playbook /home/automation/plays/sshd.yml that runs on all inventory hosts and configures SSHD daemon as follows:
-#banner is set to /etc/motd
-#X11Forwarding is disabled
-#MaxAuthTries is set to 3
-
 ---
 - hosts: all
   tasks:
-  - name: replace the strings
-    replace:
+  - name: replace the string
+    replace: 
       path: /etc/ssh/sshd_config
       backup: yes
       regexp: "{{item.reg}}"

@@ -1,4 +1,3 @@
-# do the job every minute
 ---
 - hosts: proxy
   become: true

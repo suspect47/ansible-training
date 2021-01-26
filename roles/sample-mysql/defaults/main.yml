@@ -1,0 +1,18 @@
+---
+# defaults file for sample-mysql
+
+# Create a new primary partition with a size of 800MiB
+block_device: /dev/sdb
+# Create LVM volume group
+volume_group: vg_database
+pvs: /dev/sdb1
+# file system
+file_system: xfs
+# Create a logical volume of 512mb. 
+logical_volume: lv_mysql
+# create xfs filesystem on lv_mysql
+volume_path: /dev/vg_database/lv_mysql
+# Create a directory /mnt/mysql_backups
+mount_volume_path: /mnt/mysql_backups
+# Mount volume
+volume_src: /dev/vg_database/lv_mysql
