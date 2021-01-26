@@ -1,3 +1,5 @@
+# sudo ansible-galaxy collection install community.general
+# sudo ansible-galaxy collection install ansible.posix
 ---
 - name: role sample-mysql
   hosts: database
