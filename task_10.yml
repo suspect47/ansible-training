@@ -1,0 +1,7 @@
+---
+- name: role sample-apache
+  hosts: webservers
+  become: yes
+
+  roles:
+    - { role: sample-apache, when: ansible_system == 'Linux' }

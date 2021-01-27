@@ -1,0 +1,11 @@
+---
+# defaults file for sample-apache
+
+package_1: httpd
+package_2: mod_ssl
+package_3: php
+port_number_1: 80/tcp
+port_number_2: 443/tcp
+service: httpd
+source_file: index.html.j2
+destin_file: /var/www/html/index.html

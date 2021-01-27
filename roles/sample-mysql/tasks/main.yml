@@ -53,6 +53,8 @@
     port: "{{ port_number }}"
     permanent: yes
     state: enabled
+  notify:
+    - Reload firewalld 
 
 - name: Enable "{{ service }}" service
   ansible.builtin.systemd:

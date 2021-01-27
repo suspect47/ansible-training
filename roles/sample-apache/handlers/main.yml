@@ -1,5 +1,5 @@
 ---
-# handlers file for sample-mysql
+# handlers file for sample-apache
 - name: Restart "{{ service }}"
   service: 
     name: "{{ service }}"

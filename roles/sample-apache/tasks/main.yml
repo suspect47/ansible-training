@@ -1,0 +1,54 @@
+---
+# tasks file for sample-apache
+
+- name: Install package "{{ package_1 }}"
+  package:
+    name: "{{ package_1 }}"
+    state: latest
+
+- name: Install package "{{ package_2 }}"
+  package:
+    name: "{{ package_2 }}"
+    state: latest
+
+- name: Install package "{{ package_3 }}"
+  package:
+    name: "{{ package_3 }}"
+    state: latest
+
+- name: Enable "{{ service }}" service
+  ansible.builtin.systemd:
+    name: "{{ service }}"
+    enabled: yes
+
+- name: Start "{{ service }}" service
+  ansible.builtin.service:
+    name: "{{ service }}"
+    state: started
+
+- name: permit traffic in default zone on port "{{ port_number_1 }}"
+  ansible.posix.firewalld:
+    port: "{{ port_number_1 }}"
+    permanent: yes
+    state: enabled
+  notify:
+    - Reload firewalld
+
+- name: permit traffic in default zone on port "{{ port_number_2 }}"
+  ansible.posix.firewalld:
+    port: "{{ port_number_2 }}"
+    permanent: yes
+    state: enabled
+  notify:
+    - Reload firewalld
+
+- name: Generate "{{ service }}" server config file
+  template:
+    src: "{{ source_file }}"
+    dest: "{{ destin_file }}"
+  notify:
+    - Restart "{{ service }}"
+
+- name: Run a script
+  ansible.builtin.script: 
+    cmd: ./ip.sh  
