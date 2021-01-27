@@ -64,7 +64,7 @@
     name: "{{ service }}"
     state: started
 
-- name: Editing mysql "{{ user }}" password
+- name: Editing "{{ service }}" "{{ user }}" password
   community.mysql.mysql_user:
     name: "{{ user }}"
     password: "{{ database_password }}"
@@ -73,7 +73,7 @@
     login_password: "{{ database_password }}"
     state: present
 
-- name: Generate mysql server config file
+- name: Generate "{{ service }}" server config file
   template:
     src: "{{ source_file }}"
     dest: "{{ destin_file }}"
