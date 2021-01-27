@@ -1,0 +1,9 @@
+---
+- name: restart haproxy
+  service: name=haproxy state=restarted
+
+- name: Restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+

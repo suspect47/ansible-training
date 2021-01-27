@@ -1,0 +1,15 @@
+---
+- name: haproxy role
+  hosts: proxy
+  become: yes
+
+  roles:
+    - { role: ansible-role-haproxy }
+  tasks:
+  - name: permit traffic in default zone on port 80
+    ansible.posix.firewalld:
+      port: 80/tcp
+      permanent: yes
+      state: enabled
+    notify:
+      - Restart firewalld
