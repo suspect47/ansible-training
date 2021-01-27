@@ -1,11 +1,9 @@
-# how to run: ansible-playbook task_9.yml --vault-password-file vault_key -b
-
-# sudo ansible-galaxy collection install community.general
-# sudo ansible-galaxy collection install ansible.posix
 ---
 - name: role sample-mysql
   hosts: database
   become: yes
+  vars_files:
+    - secret.yml
 
   roles:
     - { role: sample-mysql, when: ansible_system == 'Linux' }
