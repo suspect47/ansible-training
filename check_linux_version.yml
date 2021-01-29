@@ -1,0 +1,8 @@
+---
+- name: OS family
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Print linux version
+      debug: var=ansible_os_family
