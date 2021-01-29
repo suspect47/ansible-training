@@ -1,0 +1,7 @@
+---
+- name: SELinux RHEL system role
+  hosts: webservers
+  become: yes
+
+  roles:
+    - { role: linux-system-roles.selinux }
