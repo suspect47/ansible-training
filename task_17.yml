@@ -1,0 +1,11 @@
+---
+- name: systemd task
+  hosts: webservers
+  become: yes
+
+  tasks:
+  - name: set the default boot target to multi-user
+    ansible.builtin.file:
+      dest: /etc/systemd/system/default.target
+      src: /lib/systemd/system/multi-user.target
+      state: link

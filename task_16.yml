@@ -1,0 +1,32 @@
+---
+- name: install packages for proxy group
+  hosts: proxy
+  become: yes
+
+  tasks:
+
+  - name: Install tcpdump 
+    package:
+      name: tcpdump
+      state: present
+
+  - name:
+    package:
+      name: mailx
+      state: present
+
+- name: install packages for database group
+  hosts: database
+  become: yes
+
+  tasks:
+
+  - name: install lsof
+    package:
+      name: lsof
+      state: present
+
+  - name:
+    package:
+      name: mailx
+      state: present

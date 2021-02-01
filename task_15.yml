@@ -1,0 +1,25 @@
+---
+- name: facts
+  hosts: database
+  become: yes
+
+  tasks:
+  - name: Creating our custom fact
+    block:
+      - name: Creating dir  
+        file: 
+          path: /etc/ansible/facts.d 
+          state: directory
+      - name: Creating file  
+        ansible.builtin.copy:
+          content: |
+            #!/bin/bash
+            server_role=mysql
+            cat << EOF
+            { "server_role" : "$server_role"
+            }
+            EOF
+          mode: u=rwx,g=rx,o=rx
+          dest: /etc/ansible/facts.d/sample_exam.fact
+      
+             

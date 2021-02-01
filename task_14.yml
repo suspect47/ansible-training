@@ -1,0 +1,22 @@
+---
+- name: Create file with content and gzip it
+  hosts: database
+  become: yes
+  vars: 
+    dir: /mnt/mysql_backups 
+
+  tasks:
+  - name: Make file with content
+    ansible.builtin.copy:
+      content: |
+        dev
+        test
+        qa
+        prod
+      dest: "{{ dir }}/database_list.txt"
+  
+  - name: Gzip it
+    archive:
+      path: "{{ dir }}/database_list.txt"
+      dest: "{{ dir }}/archive.gz"
+      format: gz
