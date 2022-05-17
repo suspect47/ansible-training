@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Creating a directory
+    ansible.builtin.file:
+      path: /etc/systemd/system/docker.service.d
+      state: directory
+      mode: '0755'
+
+  - name: Creating a file
+    ansible.builtin.file:
+      path: /etc/systemd/system/docker.service.d/proxy.conf
+      state: touch
+      mode: u=rwx,g=r,o=r
+
+  - name: Inserting proxy settings to file
+    blockinfile:
+      path: /etc/systemd/system/docker.service.d/proxy.conf
+      block: |
+        [Service]
+        Environment="HTTP_PROXY=http://your-proxy-address:3128"
+        Environment="HTTPS_PROXY=https://your-proxy-address:3128"
+
+  - name: systemctl daemon-reload
+    ansible.builtin.systemd:
+      daemon_reload: yes
+
+  - name: Restarting docker
+    ansible.builtin.systemd:
+      state: restarted
+      name: docker
